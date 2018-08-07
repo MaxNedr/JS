@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        tr {
+            width: 25px;
+            height: 25px;
+        }
+
+        td {
+            border: 1px solid #888888;
+            width: 25px;
+            height: 25px;
+            background-color: #EEEEEE;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<table id="board"></table>
+</body>
+</html>
+<meta charset="UTF-8">
+<script>
+    'use strict';
+
+    /**
+     *
+     * @type {{
+     * rowCell: number, Количество строк в таблице
+     * colCell: number, КОличество столбцов в таблице
+     * j: number, Свойство которое используется для формирования цифр на доске.
+     * cellElements: Array, Массив для хранения таблицы
+     * cellBlack: string, Цвет тёмных клеток
+     * letterArr: string[], Массив с буквами для доски
+     * initCells: board.initCells}} Функция которая формирует доску и расставляет фигуры.
+     */
+    const board = {
+        rowCell: 10,
+        colCell: 10,
+        j: 8,
+        cellElements: [],
+        cellBlack: '#555',
+        letterArr: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'],
+        /**
+         * initCells: board.initCells}} Функция которая формирует доску и расставляет фигуры.
+         */
+        initCells: function () {
+            this.containerElement = document.getElementById('board');
+            // Пробегаемся в цикле столько раз, какое количество строк в игре.
+            for (let row = 0; row < this.rowCell; row++) {
+                // Создаем новую строку.
+                const trElem = document.createElement('tr');
+                // Добавляем строку в контейнер с игрой.
+                this.containerElement.appendChild(trElem);
+                // В каждой строке пробегаемся по циклу столько раз, сколько у нас колонок.
+                for (let col = 0; col < this.colCell; col++) {
+                    // Создаем ячейку.
+                    const cell = document.createElement('td');
+                    if (row % 2 > 0 && col % 2 === 0 && row !== this.rowCell - 1 && col !== 0) {
+                        cell.style.backgroundColor = this.cellBlack;
+                    } else {
+                        if (row % 2 === 0 && col % 2 !== 0 && row !== 0 && col !== this.colCell - 1) {
+                            cell.style.backgroundColor = this.cellBlack;
+                        }
+                    }
+
+                    // Записываем ячейку в массив ячеек.
+                    this.cellElements.push(cell);
+                    // Добавляем ячейку в текущую строку.
+                    trElem.appendChild(cell);
+                }
+            }
+            for (let i = 1; i < this.colCell - 1; i++) {
+                const cellUp = document.querySelector(`tr:nth-child(${1})`).querySelector(`td:nth-child(${i + 1})`);
+                cellUp.innerHTML = this.letterArr[i - 1];
+                const cellDown = document
+                    .querySelector(`tr:nth-child(${this.colCell})`)
+                    .querySelector(`td:nth-child(${i + 1})`);
+                cellDown.innerHTML = this.letterArr[i - 1]
+            }
+            for (let i = 1; i < this.rowCell - 1; i++) {
+                const cellRight = document.querySelector(`tr:nth-child(${i + 1})`).querySelector(`td:nth-child(${1})`);
+                cellRight.innerHTML = `${this.j}`;
+                const cellLeft = document
+                    .querySelector(`tr:nth-child(${i + 1})`)
+                    .querySelector(`td:nth-child(${this.colCell})`);
+                cellLeft.innerHTML = `${this.j}`;
+                this.j--
+            }
+            for (let i = 1; i < this.colCell - 1; i++) {
+                const blackPawn = document.querySelector(`tr:nth-child(${3})`).querySelector(`td:nth-child(${i + 1})`);
+                blackPawn.innerHTML = String.fromCharCode(9823);
+            }
+            for (let i = 1; i < this.colCell - 1; i++) {
+                const whitePawn = document.querySelector(`tr:nth-child(${8})`).querySelector(`td:nth-child(${i + 1})`);
+                whitePawn.innerHTML = String.fromCharCode(9817);
+            }
+
+            const whiteRook1 = document.querySelector(`tr:nth-child(${9})`).querySelector(`td:nth-child(2)`);
+            whiteRook1.innerHTML = String.fromCharCode(9814);
+            const whiteRook2 = document.querySelector(`tr:nth-child(${9})`).querySelector(`td:nth-child(9)`);
+            whiteRook2.innerHTML = String.fromCharCode(9814);
+            const blackRook1 = document.querySelector(`tr:nth-child(${2})`).querySelector(`td:nth-child(2)`);
+            blackRook1.innerHTML = String.fromCharCode(9820);
+            const blackRook2 = document.querySelector(`tr:nth-child(${2})`).querySelector(`td:nth-child(9)`);
+            blackRook2.innerHTML = String.fromCharCode(9820);
+            const whiteHorse1 = document.querySelector(`tr:nth-child(${9})`).querySelector(`td:nth-child(3)`);
+            whiteHorse1.innerHTML = String.fromCharCode(9816);
+            const whiteHorse2 = document.querySelector(`tr:nth-child(${9})`).querySelector(`td:nth-child(8)`);
+            whiteHorse2.innerHTML = String.fromCharCode(9816);
+            const blackHorse1 = document.querySelector(`tr:nth-child(${2})`).querySelector(`td:nth-child(3)`);
+            blackHorse1.innerHTML = String.fromCharCode(9822);
+            const blackHorse2 = document.querySelector(`tr:nth-child(${2})`).querySelector(`td:nth-child(8)`);
+            blackHorse2.innerHTML = String.fromCharCode(9822);
+            const blackBishop1 = document.querySelector(`tr:nth-child(${2})`).querySelector(`td:nth-child(4)`);
+            blackBishop1.innerHTML = String.fromCharCode(9821);
+            const blackBishop2 = document.querySelector(`tr:nth-child(${2})`).querySelector(`td:nth-child(7)`);
+            blackBishop2.innerHTML = String.fromCharCode(9821);
+            const whiteBishop1 = document.querySelector(`tr:nth-child(${9})`).querySelector(`td:nth-child(4)`);
+            whiteBishop1.innerHTML = String.fromCharCode(9815);
+            const whiteBishop2 = document.querySelector(`tr:nth-child(${9})`).querySelector(`td:nth-child(7)`);
+            whiteBishop2.innerHTML = String.fromCharCode(9815);
+            const whiteQueen = document.querySelector(`tr:nth-child(${9})`).querySelector(`td:nth-child(5)`);
+            whiteQueen.innerHTML = String.fromCharCode(9813);
+            const blackQueen = document.querySelector(`tr:nth-child(${2})`).querySelector(`td:nth-child(5)`);
+            blackQueen.innerHTML = String.fromCharCode(9819);
+            const whiteKing = document.querySelector(`tr:nth-child(${9})`).querySelector(`td:nth-child(6)`);
+            whiteKing.innerHTML = String.fromCharCode(9812);
+            const blackKing = document.querySelector(`tr:nth-child(${2})`).querySelector(`td:nth-child(6)`);
+            blackKing.innerHTML = String.fromCharCode(9818);
+        },
+
+    };
+    board.initCells();
+</script>

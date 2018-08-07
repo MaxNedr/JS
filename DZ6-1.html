@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<div id="container">
+    <div>
+        <img src="gallery/images/min/1.jpg" width="300" alt="Товар_1">
+        Цена: 15 руб.
+        <button class="buy-btn" data-price="15" data-name="item_1">Купить</button>
+    </div>
+    <div>
+        <img src="gallery/images/min/2.jpg" width="300" alt="Товар_2">
+        Цена: 250 руб.
+        <button class="buy-btn" data-price="250" data-name="item_2">Купить</button>
+    </div>
+    <div>
+        <img src="gallery/images/min/3.jpg" width="300" alt="Товар_3">
+        Цена: 350 руб.
+        <button class="buy-btn" data-price="350" data-name="item_3">Купить</button>
+    </div>
+</div>
+<div id="basket">
+    Количество товаров: <span id="basket-count">0</span>
+    Итого: <span id="basket-price">0</span>
+</div>
+<script>
+    'use strict';
+
+    /**
+     *
+     * @type {{count: Array, price: Array, basket}}
+     */
+    const basket = {
+        count:[],
+        price:[],
+
+        basketR(){
+
+        }
+    }
+
+</script>
+
+</body>
+</html>
