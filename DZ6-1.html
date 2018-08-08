@@ -28,6 +28,7 @@
 </div>
 <div id="basket">
     Количество товаров: <span id="basket-count">0</span>
+    <br>
     Итого: <span id="basket-price">0</span>
 </div>
 <script>
@@ -38,13 +39,33 @@
      * @type {{count: Array, price: Array, basket}}
      */
     const basket = {
-        count:[],
-        price:[],
+        count: null,
+        price: [],
 
-        basketR(){
+        basketR() {
+            document.querySelector('#container').addEventListener('click', event => this.containerClickHandler(event));
+
+        },
+        containerClickHandler(event) {
+            if (event.target.tagName !== 'BUTTON') {
+                return;
+            } else {
+                this.count++
+            }
+            let a = event.target.dataset.price;
+            this.price.push(a);
+            let b = 0;
+            for (let i = 0; i < this.price.length; i++) {
+                b += this.price[i] * 1;
+                //console.log(b)
+            }
+            console.log(this.price);
+            document.querySelector('#basket-price').innerHTML = `${b}`;
+            document.querySelector('#basket-count').innerHTML = `${this.count}`
 
         }
-    }
+    };
+    basket.basketR();
 
 </script>
 
