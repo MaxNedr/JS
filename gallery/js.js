@@ -121,7 +121,7 @@ const gallery = {
         return galleryWrapperElement;
     },
     changeImageForward(event) {
-        if (event.target.dataset.number = '1') {
+        if (event.target.dataset.number === '1') {
             console.log('верно');
         }
     },
