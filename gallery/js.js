@@ -18,6 +18,9 @@ const gallery = {
         openedImageCloseBtnClass: 'galleryWrapper__close',
         openedImageCloseBtnSrc: 'images/gallery/close.png',
         openedImageError: 'images/gallery/error.png',
+        arrowsEl: 'arrows',
+        arrowsElLeft: 'arrows__left',
+        arrowsElRight: 'arrows__right',
     },
 
     /**
@@ -88,7 +91,17 @@ const gallery = {
         const galleryScreenElement = document.createElement('div');
         galleryScreenElement.classList.add(this.settings.openedImageScreenClass);
         galleryWrapperElement.appendChild(galleryScreenElement);
-
+        const galleryArrowsElement = document.createElement('div');
+        galleryArrowsElement.classList.add(this.settings.arrowsEl);
+        const galleryArrowsElementLeft = document.createElement('div');
+        galleryArrowsElementLeft.classList.add(this.settings.arrowsElLeft);
+        galleryArrowsElement.appendChild(galleryArrowsElementLeft);
+        const galleryArrowsElementRight = document.createElement('div');
+        galleryArrowsElementRight.classList.add(this.settings.arrowsElRight);
+        galleryArrowsElement.appendChild(galleryArrowsElementRight);
+        galleryWrapperElement.appendChild(galleryArrowsElement);
+        galleryArrowsElementRight.addEventListener('click', () => this.changeImageForward(event));
+        galleryArrowsElementLeft.addEventListener('click', () => this.changeImageBack(event));
         // Создаем картинку для кнопки закрыть, ставим класс, src и добавляем ее в контейнер-обертку.
         const closeImageElement = new Image();
         closeImageElement.classList.add(this.settings.openedImageCloseBtnClass);
@@ -99,13 +112,23 @@ const gallery = {
         // Создаем картинку, которую хотим открыть, ставим класс и добавляем ее в контейнер-обертку.
         const image = new Image();
         image.classList.add(this.settings.openedImageClass);
-        image.onerror =()=> image.src=this.settings.openedImageError;
+        image.onerror = () => image.src = this.settings.openedImageError;
         galleryWrapperElement.appendChild(image);
         // Добавляем контейнер-обертку в тег body.
         document.body.appendChild(galleryWrapperElement);
 
         // Возвращаем добавленный в body элемент, наш контейнер-обертку.
         return galleryWrapperElement;
+    },
+    changeImageForward(event) {
+        if (event.target.dataset.number = '1') {
+            console.log('верно');
+        }
+    },
+    changeImageBack(event) {
+        if (event.target.classList = 'arrows__left') {
+            console.log('верно')
+        }
     },
 
     /**
