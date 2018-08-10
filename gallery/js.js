@@ -22,6 +22,7 @@ const gallery = {
         arrowsElLeft: 'arrows__left',
         arrowsElRight: 'arrows__right',
     },
+    arrImages: [],
 
     /**
      * Инициализирует галерею, ставит обработчик события.
@@ -50,7 +51,7 @@ const gallery = {
             return;
         }
         // Открываем картинку с полученным из целевого тега (data-full_image_url аттрибут).
-        this.openImage(event.target.dataset.full_image_url);
+        this.openImage(event.target.dataset.full_image_url)
     },
 
     /**
@@ -120,10 +121,14 @@ const gallery = {
         // Возвращаем добавленный в body элемент, наш контейнер-обертку.
         return galleryWrapperElement;
     },
+
     changeImageForward(event) {
-        if (event.target.dataset.number === '1') {
-            console.log('верно');
-        }
+        const im = this.getScreenContainer().querySelector(`.${this.settings.openedImageClass}`).src ;
+        console.log(im);
+        //this.openImage();
+
+        console.log('верно');
+
     },
     changeImageBack(event) {
         if (event.target.classList = 'arrows__left') {

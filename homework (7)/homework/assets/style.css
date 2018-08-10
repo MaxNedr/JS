@@ -1,7 +1,7 @@
 *{
     margin: 0;
     padding: 0;
-    background: #2e353d;
+    background: #535c64;
 }
 .menuButton{
     width: 150px;
@@ -11,13 +11,21 @@
     background: #007b32;
     text-align: center;
     cursor: pointer;
+    border-radius: 5px;
 }
 .menuButton:hover{
     background: #009641;
 }
+.score{
+    margin: 15px;
+    text-align: center;
+    color: #eee;
+}
+
 #game{
     border-collapse: collapse;
     margin: 2% auto 0;
+    border: 1px solid #eee;
 }
 #menu{
     display: flex;
@@ -26,17 +34,16 @@
 td.cell{
     width: 20px;
     height: 20px;
-    border: 1px dotted #eee;
     border-collapse: collapse;
 }
 .food{
-    background: #00d021;
+    background: #32d05f;
 }
 .snakeBody{
     background: #e5e5e5;
 }
 .snakeHead{
-    background: #9b0013;
+    background: #9b1d36;
 }
 .disabled {
     background: #7c7c7c;
