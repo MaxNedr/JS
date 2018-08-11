@@ -145,7 +145,6 @@ const map = {
      * @see {@link https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach|Array.prototype.forEach()}
      */
     render(snakePointsArray, foodPoint) {
-        console.log(this.usedCells);
         // Чистим карту от предыдущего рендера, всем занятым ячейкам оставляем только класс cell.
         for (const cell of this.usedCells) {
             cell.className = 'cell';
@@ -177,6 +176,7 @@ const map = {
  * @property {string} lastStepDirection Направление, куда сходила змейка прошлый раз.
  */
 const snake = {
+    config,
     body: null,
     direction: null,
     lastStepDirection: null,
@@ -254,12 +254,24 @@ const snake = {
         // Возвращаем точку, где окажется голова змейки в зависимости от направления.
         switch (this.direction) {
             case 'up':
+                if (firstPoint.y  <= 0) {
+                    return {x: firstPoint.x, y: this.config.getRowsCount()-1};
+                }
                 return {x: firstPoint.x, y: firstPoint.y - 1};
             case 'right':
+                if (firstPoint.x + 1 >= this.config.getColsCount()) {
+                    return {x: 0, y: firstPoint.y};
+                }
                 return {x: firstPoint.x + 1, y: firstPoint.y};
             case 'down':
+                if (firstPoint.y + 1 >= this.config.getRowsCount()) {
+                    return {x: firstPoint.x, y: 0};
+                }
                 return {x: firstPoint.x, y: firstPoint.y + 1};
             case 'left':
+                if (firstPoint.x <= 0) {
+                    return {x: this.config.getColsCount()-1, y: firstPoint.y};
+                }
                 return {x: firstPoint.x - 1, y: firstPoint.y};
         }
     },
@@ -403,6 +415,8 @@ const game = {
      * Ставит игру в начальное положение.
      */
     reset() {
+        this.score = '0';
+        document.querySelector('#score').innerHTML = this.score;
         // Ставим статус игры в "остановлена".
         this.stop();
         // Инициализируем змейку.
@@ -634,11 +648,11 @@ const game = {
         // Получаем следующую точку головы змейки в соответствии с текущим направлением.
         const nextHeadPoint = this.snake.getNextStepHeadPoint();
         // Змейка может сделать шаг если следующая точка не на теле змейки и точка внутри игрового поля.
-        return !this.snake.isOnPoint(nextHeadPoint) &&
-            nextHeadPoint.x < this.config.getColsCount() &&
-            nextHeadPoint.y < this.config.getRowsCount() &&
-            nextHeadPoint.x >= 0 &&
-            nextHeadPoint.y >= 0;
+        return !this.snake.isOnPoint(nextHeadPoint) //&&
+        /*nextHeadPoint.x < this.config.getColsCount() &&
+        nextHeadPoint.y < this.config.getRowsCount() &&
+        nextHeadPoint.x >= 0 &&
+        nextHeadPoint.y >= 0;*/
     },
 };
 

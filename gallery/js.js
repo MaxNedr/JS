@@ -145,4 +145,4 @@ const gallery = {
 };
 
 // Инициализируем нашу галерею при загрузке страницы.
-window.onload = () => gallery.init({previewSelector: '.galleryPreviewsContainer'});
+window.onload = (() => gallery.init({previewSelector: '.galleryPreviewsContainer'}));
