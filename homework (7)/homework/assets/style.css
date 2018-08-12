@@ -23,9 +23,10 @@
 }
 
 #game{
-    border-collapse: collapse;
+    /*border-collapse: collapse;*/
     margin: 2% auto 0;
     border: 1px solid #eee;
+    border-spacing: 1px;
 }
 #menu{
     display: flex;
@@ -34,7 +35,7 @@
 td.cell{
     width: 20px;
     height: 20px;
-    border-collapse: collapse;
+    /*border-collapse: collapse;*/
 }
 .food{
     background: #32d05f;
