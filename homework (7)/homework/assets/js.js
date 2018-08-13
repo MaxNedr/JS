@@ -176,7 +176,6 @@ const map = {
  * @property {string} lastStepDirection Направление, куда сходила змейка прошлый раз.
  */
 const snake = {
-    config,
     body: null,
     direction: null,
     lastStepDirection: null,
@@ -224,7 +223,7 @@ const snake = {
         // Записываем направление движения, которое сейчас произойдет как направление прошлого шага.
         this.lastStepDirection = this.direction;
         // Вставляем следующую точку в начало массива.
-        this.body.unshift(this.getNextStepHeadPoint(this.config.getRowsCount(), this.config.getColsCount()));
+        this.body.unshift(this.getNextStepHeadPoint(config.getRowsCount(), config.getColsCount()));
         // Удаляем последний лишний элемент.
         this.body.pop();
     },
