@@ -176,20 +176,25 @@ const map = {
  * @property {string} lastStepDirection Направление, куда сходила змейка прошлый раз.
  */
 const snake = {
-    config,
     body: null,
     direction: null,
     lastStepDirection: null,
+    getRows: null,
+    getCols: null,
 
     /**
      * Инициализирует змейку, откуда она будет начинать и ее направление.
      * @param {{x: int, y: int}[]} startBody Начальная позиция змейки.
      * @param {string} direction Начальное направление игрока.
+     * @param {number} Rows Количество строк в поле
+     * @param {number} Cols Количество ячеек в строке в поле
      */
-    init(startBody, direction) {
+    init(startBody, direction, Rows, Cols) {
         this.body = startBody;
         this.direction = direction;
         this.lastStepDirection = direction;
+        this.getRows = Rows;
+        this.getCols = Cols;
     },
 
     /**
@@ -224,7 +229,7 @@ const snake = {
         // Записываем направление движения, которое сейчас произойдет как направление прошлого шага.
         this.lastStepDirection = this.direction;
         // Вставляем следующую точку в начало массива.
-        this.body.unshift(this.getNextStepHeadPoint(this.config.getRowsCount(), this.config.getColsCount()));
+        this.body.unshift(this.getNextStepHeadPoint(this.getRows, this.getCols));
         // Удаляем последний лишний элемент.
         this.body.pop();
     },
@@ -432,7 +437,7 @@ const game = {
         // Ставим статус игры в "остановлена".
         this.stop();
         // Инициализируем змейку.
-        this.snake.init(this.getStartSnakeBody(), 'up');
+        this.snake.init(this.getStartSnakeBody(), 'up', this.config.getRowsCount(), this.config.getColsCount());
         // Ставим еду на карту в случайную пустую ячейку.
         this.food.setCoordinates(this.getRandomFreeCoordinates());
         // Отображаем все что нужно для игры.
