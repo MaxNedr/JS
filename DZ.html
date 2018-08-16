@@ -1,6 +1,15 @@
 <meta charset="UTF-8">
+<input type="text" id="txt"/>
+<input type="button" id="btn" value="Жмакни меня">
 <script>
-   'use strict';
+    'use strict';
 
 
+    function someFunc() {
+        alert(document.getElementById("txt").value);
+    }
+
+    document.getElementById("btn").onclick = someFunc;
 </script>
+
+

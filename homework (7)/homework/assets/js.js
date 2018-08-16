@@ -382,7 +382,18 @@ const inputSetting = {
     inputSpeed: null,
     inputRowsCols: null,
     inputWinScore: null,
+    getInputSpeed() {
+        return this.inputSpeed = document.getElementById("speed").value;
+    },
+    getInputRowsCols() {
+        return this.inputRowsCols = document.getElementById('rowsCols').value;
 
+    },
+    getInputWinScore() {
+        return this.inputWinScore = document.getElementById('winScore').value;
+    },
+
+//document.getElementById("btn").onclick = someFunc;
 };
 
 /**
@@ -542,6 +553,18 @@ const game = {
         document.getElementById('newGameButton').addEventListener('click', event => this.newGameClickHandler(event));
         // При нажатии кнопки, если статус игры "играем", то вызываем функцию смены направления у змейки.
         document.addEventListener('keydown', event => this.keyDownHandler(event));
+        document.getElementById('submit').addEventListener('click', () => this.setInputSettings());
+
+    },
+
+    setInputSettings() {
+        this.inputSetting.getInputSpeed();
+        this.inputSetting.getInputRowsCols();
+        this.inputSetting.getInputWinScore();
+        this.init({
+            speed: inputSetting.getInputSpeed(), rowsCount: inputSetting.getInputRowsCols(),
+            colsCount: inputSetting.getInputRowsCols(), winFoodCount: inputSetting.getInputWinScore()
+        });
     },
 
     /**
@@ -673,6 +696,8 @@ const game = {
     },
 };
 
-
 // При загрузке страницы инициализируем игру.
-window.onload = game.init({speed: 5});
+window.onload = game.init({
+    speed: inputSetting.getInputSpeed(), rowsCount: inputSetting.getInputRowsCols(),
+    colsCount: inputSetting.getInputRowsCols(), winFoodCount: inputSetting.getInputWinScore()
+});
