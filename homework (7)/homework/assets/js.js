@@ -698,6 +698,6 @@ const game = {
 
 // При загрузке страницы инициализируем игру.
 window.onload = game.init({
-    speed: inputSetting.getInputSpeed(), rowsCount: inputSetting.getInputRowsCols(),
-    colsCount: inputSetting.getInputRowsCols(), winFoodCount: inputSetting.getInputWinScore()
+    speed: game.inputSetting.getInputSpeed(), rowsCount: game.inputSetting.getInputRowsCols(),
+    colsCount: game.inputSetting.getInputRowsCols(), winFoodCount: game.inputSetting.getInputWinScore()
 });
