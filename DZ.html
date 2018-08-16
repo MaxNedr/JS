@@ -2,5 +2,30 @@
 <script>
    'use strict';
 
+   $(document).on('change', '[data-hex-img-main]', function () {
+       // $('[data-hex-img-main]').parent('label').removeClass('checked');
+       let findedValue = $(this).attr('id');
+       findedValue = findedValue.split('-')[1];
+       console.log(findedValue+'this');
+
+       if ($(this).prop("checked")) {
+           let sectionimages = modelForm.root.getData().images;
+           //     console.log(sectionimages+'sections');
+           for (let i in sectionimages) {
+               console.log(sectionimages[i].$index+'sections[i]'+ findedValue+'this');
+               if (sectionimages[i].$index != findedValue) {
+                   $('lb_img_sel-'+sectionimages[i].$index).removeClass('checked');
+                   sectionimages[i].order_by = '9';
+                   console.log('9');
+
+               } else {
+                   console.log('1');
+                   sectionimages[i].order_by = '1';
+                   $('lb_img_sel-'+sectionimages[i].$index).addClass('checked');
+               }
+           }
+           //     modelForm.draw();
+       }
+   });
 
 </script>

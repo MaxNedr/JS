@@ -73,24 +73,24 @@ const config = {
             errors: [],
         };
 
-        if (this.settings.rowsCount < 10 || this.settings.rowsCount > 30) {
+        if (this.settings.rowsCount < 10 || this.settings.rowsCount > 40) {
             result.isValid = false;
-            result.errors.push('Неверные настройки, значение rowsCount должно быть в диапазоне [10, 30].');
+            result.errors.push('Неверные настройки, значение rowsCount должно быть в диапазоне [10, 40].');
         }
 
-        if (this.settings.colsCount < 10 || this.settings.colsCount > 30) {
+        if (this.settings.colsCount < 10 || this.settings.colsCount > 40) {
             result.isValid = false;
-            result.errors.push('Неверные настройки, значение colsCount должно быть в диапазоне [10, 30].');
+            result.errors.push('Неверные настройки, значение colsCount должно быть в диапазоне [10, 40].');
         }
 
-        if (this.settings.speed < 1 || this.settings.speed > 10) {
+        if (this.settings.speed < 1 || this.settings.speed > 20) {
             result.isValid = false;
-            result.errors.push('Неверные настройки, значение speed должно быть в диапазоне [1, 10].');
+            result.errors.push('Неверные настройки, значение speed должно быть в диапазоне [1, 20].');
         }
 
-        if (this.settings.winFoodCount < 5 || this.settings.winFoodCount > 50) {
+        if (this.settings.winFoodCount < 5 || this.settings.winFoodCount > 100) {
             result.isValid = false;
-            result.errors.push('Неверные настройки, значение winLength должно быть в диапазоне [5, 50].');
+            result.errors.push('Неверные настройки, значение winLength должно быть в диапазоне [5, 100].');
         }
 
         return result;
@@ -660,6 +660,9 @@ const game = {
         nextHeadPoint.y >= 0;*/
     },
 };
+let speed = +prompt("Введите скорость от 1 до 20");
+let rowsCols = +prompt("Введите высоту и ширину поля от 10 до 40");
+let winFood = +prompt("Введите число очков до победы от 5 до 100");
 
 // При загрузке страницы инициализируем игру.
-window.onload = game.init({speed: 5});
+window.onload = game.init({speed: speed, rowsCount: rowsCols, colsCount: rowsCols, winFoodCount: winFood,});
