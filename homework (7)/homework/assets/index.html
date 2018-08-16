@@ -1,21 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Змейка</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <title>Змейка</title>
+
+    <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 <div class="score">Текущий счёт: <span id="score">0</span></div>
-  <div id="game-wrap">
+<div id="game-wrap">
     <table id="game"></table>
-  </div>
+</div>
 
-  <div id="menu">
+<div id="menu">
     <div id="playButton" class="menuButton">Старт</div>
     <div id="newGameButton" class="menuButton">Новая игра</div>
-  </div>
+</div>
+<div class="formSettings">
 
-  <script src="js.js"></script>
+    <form action="" class="wrapper">
+        <div class="speed">
+            <label for="speed">Настройка скорости</label>
+            <input id="speed" min="1" max="25" value="5" type="number">
+        </div>
+        <div class="rowsCols">
+            <label for="rowsCols">Настройка размера поля</label>
+            <input id="rowsCols" min="10" max="40" value="22" type="number">
+        </div>
+        <div class="winScore">
+            <label for="winScore">Настройка максимального числа очков</label>
+            <input id="winScore" min="5" max="99" value="50" type="number">
+        </div>
+        <input type="submit" value="Сохранить настройки">
+
+    </form>
+</div>
+
+
+<script src="js.js"></script>
 </body>
 </html>

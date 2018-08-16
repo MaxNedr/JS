@@ -73,24 +73,24 @@ const config = {
             errors: [],
         };
 
-        if (this.settings.rowsCount < 10 || this.settings.rowsCount > 30) {
+        if (this.settings.rowsCount < 10 || this.settings.rowsCount > 40) {
             result.isValid = false;
-            result.errors.push('Неверные настройки, значение rowsCount должно быть в диапазоне [10, 30].');
+            result.errors.push('Неверные настройки, значение rowsCount должно быть в диапазоне [10, 40].');
         }
 
-        if (this.settings.colsCount < 10 || this.settings.colsCount > 30) {
+        if (this.settings.colsCount < 10 || this.settings.colsCount > 40) {
             result.isValid = false;
-            result.errors.push('Неверные настройки, значение colsCount должно быть в диапазоне [10, 30].');
+            result.errors.push('Неверные настройки, значение colsCount должно быть в диапазоне [10, 40].');
         }
 
-        if (this.settings.speed < 1 || this.settings.speed > 10) {
+        if (this.settings.speed < 1 || this.settings.speed > 25) {
             result.isValid = false;
-            result.errors.push('Неверные настройки, значение speed должно быть в диапазоне [1, 10].');
+            result.errors.push('Неверные настройки, значение speed должно быть в диапазоне [1, 25].');
         }
 
-        if (this.settings.winFoodCount < 5 || this.settings.winFoodCount > 50) {
+        if (this.settings.winFoodCount < 5 || this.settings.winFoodCount > 99) {
             result.isValid = false;
-            result.errors.push('Неверные настройки, значение winLength должно быть в диапазоне [5, 50].');
+            result.errors.push('Неверные настройки, значение winLength должно быть в диапазоне [5, 99].');
         }
 
         return result;
@@ -248,14 +248,14 @@ const snake = {
      * Отдает точку, где будет голова змейки если она сделает шаг.
      * @returns {{x: int, y: int}} Следующая точка куда придет змейка сделав шаг.
      */
-    getNextStepHeadPoint(rowsCount, colsCount ) {
+    getNextStepHeadPoint(rowsCount, colsCount) {
         // Получаем в отдельную переменную голову змейки.
         const firstPoint = this.body[0];
         // Возвращаем точку, где окажется голова змейки в зависимости от направления.
         switch (this.direction) {
             case 'up':
-                if (firstPoint.y  <= 0) {
-                    return {x: firstPoint.x, y: rowsCount-1};
+                if (firstPoint.y <= 0) {
+                    return {x: firstPoint.x, y: rowsCount - 1};
                 }
                 return {x: firstPoint.x, y: firstPoint.y - 1};
             case 'right':
@@ -270,7 +270,7 @@ const snake = {
                 return {x: firstPoint.x, y: firstPoint.y + 1};
             case 'left':
                 if (firstPoint.x <= 0) {
-                    return {x: colsCount-1, y: firstPoint.y};
+                    return {x: colsCount - 1, y: firstPoint.y};
                 }
                 return {x: firstPoint.x - 1, y: firstPoint.y};
         }
@@ -370,6 +370,17 @@ const status = {
 };
 
 /**
+ * Объект ввода настроек пользователем
+ * @type {{}}
+ */
+const inputSetting = {
+    inputSpeed: null,
+    inputRowsCols: null,
+    inputWinScore: null,
+
+};
+
+/**
  * Объект игры.
  * @property {settings} settings Настройки игры.
  * @property {map} map Объект отображения.
@@ -384,6 +395,7 @@ const game = {
     snake,
     food,
     status,
+    inputSetting,
     tickInterval: null,
     score: null,
 
@@ -531,7 +543,7 @@ const game = {
      * Отображает все для игры, карту, еду и змейку.
      */
     render() {
-       // this.map.init(this.config.getRowsCount(), this.config.getColsCount());
+        // this.map.init(this.config.getRowsCount(), this.config.getColsCount());
         this.map.render(this.snake.getBody(), this.food.getCoordinates());
     },
 
@@ -655,6 +667,7 @@ const game = {
         nextHeadPoint.y >= 0;*/
     },
 };
+
 
 // При загрузке страницы инициализируем игру.
 window.onload = game.init({speed: 5});
