@@ -83,14 +83,14 @@ const config = {
             result.errors.push('Неверные настройки, значение colsCount должно быть в диапазоне [10, 40].');
         }
 
-        if (this.settings.speed < 1 || this.settings.speed > 20) {
+        if (this.settings.speed < 1 || this.settings.speed > 25) {
             result.isValid = false;
-            result.errors.push('Неверные настройки, значение speed должно быть в диапазоне [1, 20].');
+            result.errors.push('Неверные настройки, значение speed должно быть в диапазоне [1, 25].');
         }
 
-        if (this.settings.winFoodCount < 5 || this.settings.winFoodCount > 100) {
+        if (this.settings.winFoodCount < 5 || this.settings.winFoodCount > 99) {
             result.isValid = false;
-            result.errors.push('Неверные настройки, значение winLength должно быть в диапазоне [5, 100].');
+            result.errors.push('Неверные настройки, значение winLength должно быть в диапазоне [5, 99].');
         }
 
         return result;
@@ -375,6 +375,28 @@ const status = {
 };
 
 /**
+ * Объект ввода настроек пользователем
+ * @type {{}}
+ */
+const inputSetting = {
+    inputSpeed: null,
+    inputRowsCols: null,
+    inputWinScore: null,
+    getInputSpeed() {
+        return this.inputSpeed = document.getElementById("speed").value;
+    },
+    getInputRowsCols() {
+        return this.inputRowsCols = document.getElementById('rowsCols').value;
+
+    },
+    getInputWinScore() {
+        return this.inputWinScore = document.getElementById('winScore').value;
+    },
+
+//document.getElementById("btn").onclick = someFunc;
+};
+
+/**
  * Объект игры.
  * @property {settings} settings Настройки игры.
  * @property {map} map Объект отображения.
@@ -389,6 +411,7 @@ const game = {
     snake,
     food,
     status,
+    inputSetting,
     tickInterval: null,
     score: null,
 
@@ -530,6 +553,18 @@ const game = {
         document.getElementById('newGameButton').addEventListener('click', event => this.newGameClickHandler(event));
         // При нажатии кнопки, если статус игры "играем", то вызываем функцию смены направления у змейки.
         document.addEventListener('keydown', event => this.keyDownHandler(event));
+        document.getElementById('submit').addEventListener('click', () => this.setInputSettings());
+
+    },
+
+    setInputSettings() {
+        this.inputSetting.getInputSpeed();
+        this.inputSetting.getInputRowsCols();
+        this.inputSetting.getInputWinScore();
+        this.init({
+            speed: inputSetting.getInputSpeed(), rowsCount: inputSetting.getInputRowsCols(),
+            colsCount: inputSetting.getInputRowsCols(), winFoodCount: inputSetting.getInputWinScore()
+        });
     },
 
     /**
@@ -660,9 +695,9 @@ const game = {
         nextHeadPoint.y >= 0;*/
     },
 };
-let speed = +prompt("Введите скорость от 1 до 20");
-let rowsCols = +prompt("Введите высоту и ширину поля от 10 до 40");
-let winFood = +prompt("Введите число очков до победы от 5 до 100");
 
 // При загрузке страницы инициализируем игру.
-window.onload = game.init({speed: speed, rowsCount: rowsCols, colsCount: rowsCols, winFoodCount: winFood,});
+window.onload = game.init({
+    speed: game.inputSetting.getInputSpeed(), rowsCount: game.inputSetting.getInputRowsCols(),
+    colsCount: game.inputSetting.getInputRowsCols(), winFoodCount: game.inputSetting.getInputWinScore()
+});
