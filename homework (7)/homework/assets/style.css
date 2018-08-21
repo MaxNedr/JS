@@ -71,7 +71,7 @@ td.cell{
     float: right;
     padding: 2px 5px;
 }
-.wrapper input[type='button']{
+.wrapper input[type='submit']{
     width: 168px;
     padding: 15px;
     margin: 10px;
@@ -81,7 +81,7 @@ td.cell{
     cursor: pointer;
     border-radius: 5px;
 }
-.wrapper input[type='button']:hover{
+.wrapper input[type='submit']:hover{
     background: #009641;
 }
 

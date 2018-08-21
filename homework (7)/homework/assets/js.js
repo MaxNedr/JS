@@ -83,9 +83,9 @@ const config = {
             result.errors.push('Неверные настройки, значение colsCount должно быть в диапазоне [10, 40].');
         }
 
-        if (this.settings.speed < 1 || this.settings.speed > 25) {
+        if (this.settings.speed < 1 || this.settings.speed > 50) {
             result.isValid = false;
-            result.errors.push('Неверные настройки, значение speed должно быть в диапазоне [1, 25].');
+            result.errors.push('Неверные настройки, значение speed должно быть в диапазоне [1, 50].');
         }
 
         if (this.settings.winFoodCount < 5 || this.settings.winFoodCount > 99) {
@@ -393,7 +393,7 @@ const inputSetting = {
         return this.inputWinScore = document.getElementById('winScore').value;
     },
 
-//document.getElementById("btn").onclick = someFunc;
+
 };
 
 /**
@@ -553,25 +553,41 @@ const game = {
         document.getElementById('newGameButton').addEventListener('click', event => this.newGameClickHandler(event));
         // При нажатии кнопки, если статус игры "играем", то вызываем функцию смены направления у змейки.
         document.addEventListener('keydown', event => this.keyDownHandler(event));
-        document.getElementById('submit').addEventListener('click', () => this.setInputSettings());
+        document.getElementById('submit').addEventListener('click', event => this.setInputSettings(event));
 
     },
-
+    /**
+     * Применяет настройки пользователя и перезапускает игру
+     */
     setInputSettings() {
+        this.inputSetting.getInputWinScore();
         this.inputSetting.getInputSpeed();
         this.inputSetting.getInputRowsCols();
-        this.inputSetting.getInputWinScore();
-        this.init({
-            speed: inputSetting.getInputSpeed(), rowsCount: inputSetting.getInputRowsCols(),
-            colsCount: inputSetting.getInputRowsCols(), winFoodCount: inputSetting.getInputWinScore()
+        this.config.init({
+            speed: this.inputSetting.inputSpeed, rowsCount: this.inputSetting.inputRowsCols,
+            colsCount: this.inputSetting.inputRowsCols, winFoodCount: this.inputSetting.inputWinScore
         });
+        // Получаем результат валидации настроек.
+        const validation = this.config.validate();
+        // Если настройки игры неверные - сообщаем об ошибках и выходим из метода, игру не запускаем.
+        if (!validation.isValid) {
+            for (const err of validation.errors) {
+                console.error(err);
+            }
+            this.setPlayButton('Игра не может быть начата', true);
+            return;
+        }
+        // Инициализируем карту.
+        this.map.init(this.config.getRowsCount(), this.config.getColsCount());
+        // Ставим игру в начальное положение.
+        this.reset();
     },
+
 
     /**
      * Отображает все для игры, карту, еду и змейку.
      */
     render() {
-        // this.map.init(this.config.getRowsCount(), this.config.getColsCount());
         this.map.render(this.snake.getBody(), this.food.getCoordinates());
     },
 
@@ -603,8 +619,11 @@ const game = {
         // Если сейчас статус игры "играем", то игру останавливаем, если игра остановлена, то запускаем.
         if (this.status.isPlaying()) {
             this.stop();
+
         } else if (this.status.isStopped()) {
             this.play();
+
+
         }
     },
 
@@ -688,16 +707,12 @@ const game = {
         // Получаем следующую точку головы змейки в соответствии с текущим направлением.
         const nextHeadPoint = this.snake.getNextStepHeadPoint(this.config.getRowsCount(), this.config.getColsCount());
         // Змейка может сделать шаг если следующая точка не на теле змейки и точка внутри игрового поля.
-        return !this.snake.isOnPoint(nextHeadPoint) //&&
-        /*nextHeadPoint.x < this.config.getColsCount() &&
-        nextHeadPoint.y < this.config.getRowsCount() &&
-        nextHeadPoint.x >= 0 &&
-        nextHeadPoint.y >= 0;*/
+        return !this.snake.isOnPoint(nextHeadPoint)
     },
 };
 
 // При загрузке страницы инициализируем игру.
 window.onload = game.init({
-    speed: game.inputSetting.getInputSpeed(), rowsCount: game.inputSetting.getInputRowsCols(),
-    colsCount: game.inputSetting.getInputRowsCols(), winFoodCount: game.inputSetting.getInputWinScore()
+    speed: inputSetting.getInputSpeed(), rowsCount: inputSetting.getInputRowsCols(),
+    colsCount: inputSetting.getInputRowsCols(), winFoodCount: inputSetting.getInputWinScore()
 });
