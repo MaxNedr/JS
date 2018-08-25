@@ -563,9 +563,10 @@ const game = {
         this.inputSetting.getInputWinScore();
         this.inputSetting.getInputSpeed();
         this.inputSetting.getInputRowsCols();
+        console.log(this.inputSetting.getInputWinScore()+this.inputSetting.getInputSpeed()+this.inputSetting.getInputRowsCols());
         this.config.init({
-            speed: this.inputSetting.inputSpeed, rowsCount: this.inputSetting.inputRowsCols,
-            colsCount: this.inputSetting.inputRowsCols, winFoodCount: this.inputSetting.inputWinScore
+            speed: this.inputSetting.getInputSpeed(), rowsCount: this.inputSetting.getInputRowsCols(),
+            colsCount: this.inputSetting.getInputRowsCols(), winFoodCount: this.inputSetting.getInputWinScore()
         });
         // Получаем результат валидации настроек.
         const validation = this.config.validate();

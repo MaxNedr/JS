@@ -50,7 +50,7 @@ td.cell{
     background: #7c7c7c;
 }
 .disabled:hover{
-    background: #7c7c7c;
+    background: #a3a3a3;
 }
 .formSettings{
     display: flex;
@@ -71,7 +71,7 @@ td.cell{
     float: right;
     padding: 2px 5px;
 }
-.wrapper input[type='submit']{
+.wrapper input[type='button']{
     width: 168px;
     padding: 15px;
     margin: 10px;
@@ -81,7 +81,7 @@ td.cell{
     cursor: pointer;
     border-radius: 5px;
 }
-.wrapper input[type='submit']:hover{
+.wrapper input[type='button']:hover{
     background: #009641;
 }
 
