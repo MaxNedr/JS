@@ -53,7 +53,7 @@ td.cell{
     background: #7c7c7c;
 }
 .disabled:hover{
-    background: #7c7c7c;
+    background: #a3a3a3;
 }
 .formSettings{
     display: flex;
