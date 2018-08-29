@@ -26,7 +26,7 @@
     /*border-collapse: collapse;*/
     margin: 2% auto 0;
     border: 1px solid #eee;
-    border-spacing: 1px;
+    border-spacing: 0.5px;
 }
 #menu{
     display: flex;
@@ -38,16 +38,14 @@ td.cell{
     /*border-collapse: collapse;*/
 }
 .food{
-    background-image: url("donut.png");
-    /*background: #32d05f;*/
+    background: url("donut.png") center no-repeat;
 }
 .snakeBody{
-    background-image: url("body.png");
-   /* background: #e5e5e5;*/
+    background: url("body.png") center no-repeat;
+
 }
 .snakeHead{
-    background-image: url("Head.png");
-   /* background: #9b1d36;*/
+    background: url("gomer1.png") center no-repeat;
 }
 .disabled {
     background: #7c7c7c;
