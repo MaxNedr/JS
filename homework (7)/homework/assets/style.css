@@ -38,13 +38,16 @@ td.cell{
     /*border-collapse: collapse;*/
 }
 .food{
-    background: #32d05f;
+    background-image: url("donut.png");
+    /*background: #32d05f;*/
 }
 .snakeBody{
-    background: #e5e5e5;
+    background-image: url("body.png");
+   /* background: #e5e5e5;*/
 }
 .snakeHead{
-    background: #9b1d36;
+    background-image: url("Head.png");
+   /* background: #9b1d36;*/
 }
 .disabled {
     background: #7c7c7c;
@@ -70,8 +73,9 @@ td.cell{
 .wrapper input[type='number']{
     float: right;
     padding: 2px 5px;
+    color: #eeeeee;
 }
-.wrapper input[type='submit']{
+.wrapper input[type='button']{
     width: 168px;
     padding: 15px;
     margin: 10px;
@@ -81,7 +85,7 @@ td.cell{
     cursor: pointer;
     border-radius: 5px;
 }
-.wrapper input[type='submit']:hover{
+.wrapper input[type='button']:hover{
     background: #009641;
 }
 
